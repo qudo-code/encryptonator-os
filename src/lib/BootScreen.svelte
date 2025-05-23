@@ -42,8 +42,8 @@
 
   function startBoot() {
     showLogo = true;
-    const duration = isModern ? 3000 : 5000;
-    const steps = isModern ? 100 : currentMessages.length;
+    const duration = isModern ? 800 : 1200;
+    const steps = isModern ? 50 : currentMessages.length;
     const interval = duration / steps;
 
     let currentStep = 0;
@@ -58,12 +58,12 @@
       
       if (currentStep > steps) {
         clearInterval(timer);
-        setTimeout(onBootComplete, 500);
+        onBootComplete();
       }
     }, interval);
   }
 
-  setTimeout(startBoot, 1000);
+  setTimeout(startBoot, 100);
 </script>
 
 <div class="boot-screen" class:modern={isModern} class:classic={isClassic} class:xp={isXP} class:vista={isVista}>
@@ -153,14 +153,14 @@
   }
 
   .logo {
-    margin-bottom: 40px;
-    animation: fadeIn 2s ease-out;
+    margin-bottom: 20px;
+    animation: fadeIn 0.5s ease-out;
   }
 
   .logo-icon {
     font-size: 64px;
-    margin-bottom: 20px;
-    animation: glow 2s infinite alternate;
+    margin-bottom: 10px;
+    animation: glow 1s infinite alternate;
   }
 
   .logo-text {
@@ -170,7 +170,7 @@
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    text-shadow: 0 0 10px rgba(255,255,255,0.5);
+    text-shadow: 0 0 5px rgba(122,170,255,0.5);
   }
 
   /* Space background */
@@ -181,7 +181,7 @@
     right: 0;
     bottom: 0;
     background: #000 url('data:image/svg+xml,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="100%" fill="black"/><g fill="white">%3Ccircle cx="24" cy="30" r="1"/%3E%3Ccircle cx="65" cy="85" r="1"/%3E%3Ccircle cx="120" cy="50" r="1"/%3E%3Ccircle cx="180" cy="160" r="1"/%3E%3Ccircle cx="150" cy="30" r="1"/%3E%3Ccircle cx="95" cy="140" r="1"/%3E%3Ccircle cx="40" cy="160" r="1"/%3E%3Ccircle cx="180" cy="80" r="1"/%3E%3Ccircle cx="10" cy="100" r="1"/%3E%3Ccircle cx="85" cy="30" r="1"/%3E</g></svg>') repeat;
-    animation: rotate 200s linear infinite;
+    animation: rotate 100s linear infinite;
   }
 
   .twinkling {
@@ -198,14 +198,14 @@
       rgba(255,255,255,0.1) 80%,
       rgba(255,255,255,0) 100%
     );
-    animation: twinkle 4s ease-in-out infinite;
+    animation: twinkle 2s ease-in-out infinite;
   }
 
   .message {
     text-align: center;
     margin-top: 20px;
     font-size: 18px;
-    text-shadow: 0 0 10px rgba(255,255,255,0.5);
+    text-shadow: 0 0 5px rgba(122,170,255,0.5);
   }
 
   /* Classic (Windows 98) Boot */
@@ -257,7 +257,7 @@
     height: 100%;
     background: linear-gradient(90deg, #7af, #fff);
     margin-right: 2px;
-    animation: slide 1.5s infinite;
+    animation: slide 0.75s infinite;
     transform-origin: left center;
     box-shadow: 0 0 10px rgba(122,170,255,0.5);
   }
@@ -278,7 +278,7 @@
     height: 10px;
     background: #7af;
     border-radius: 50%;
-    animation: pulse 1.5s infinite;
+    animation: pulse 0.75s infinite;
     box-shadow: 0 0 10px rgba(122,170,255,0.5);
   }
 
@@ -298,7 +298,7 @@
     height: 8px;
     background: #7af;
     border-radius: 50%;
-    animation: bounce 1.5s infinite;
+    animation: bounce 0.75s infinite;
     animation-delay: var(--delay);
     box-shadow: 0 0 10px rgba(122,170,255,0.5);
   }
@@ -310,14 +310,14 @@
   }
 
   @keyframes pulse {
-    0% { transform: scale(0.5); opacity: 0.2; }
+    0% { transform: scale(0.5); opacity: 0.3; }
     50% { transform: scale(1); opacity: 1; }
-    100% { transform: scale(0.5); opacity: 0.2; }
+    100% { transform: scale(0.5); opacity: 0.3; }
   }
 
   @keyframes bounce {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+    50% { transform: translateY(-5px); }
   }
 
   @keyframes rotate {
@@ -326,17 +326,28 @@
   }
 
   @keyframes twinkle {
-    0%, 100% { opacity: 0.5; }
+    0%, 100% { opacity: 0.7; }
     50% { opacity: 1; }
   }
 
   @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { 
+      opacity: 0; 
+      transform: translateY(-10px);
+    }
+    to { 
+      opacity: 1; 
+      transform: translateY(0); 
+    }
   }
 
   @keyframes glow {
-    from { text-shadow: 0 0 10px rgba(122,170,255,0.5); }
-    to { text-shadow: 0 0 20px rgba(122,170,255,0.8), 0 0 30px rgba(122,170,255,0.6); }
+    from { 
+      text-shadow: 0 0 5px rgba(122,170,255,0.5);
+    }
+    to { 
+      text-shadow: 0 0 10px rgba(122,170,255,0.8), 
+                   0 0 15px rgba(122,170,255,0.6);
+    }
   }
 </style> 

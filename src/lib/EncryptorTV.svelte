@@ -50,28 +50,34 @@
           controls: 0,
           modestbranding: 1,
           playlist: playlistId,
-          rel: 0, // Don't show related videos
-          iv_load_policy: 3 // Don't show video annotations
+          rel: 0,
+          iv_load_policy: 3,
+          playsinline: 1
         }
       });
     };
 
-    // Auto-turn on the TV after a brief delay
-    setTimeout(() => {
-      handlePowerToggle();
-    }, 100); // Quick initial delay before auto-power on
+    // Auto-turn on the TV immediately
+    handlePowerToggle();
   });
 
   function handlePowerToggle() {
     if (!isPlaying) {
       showStatic = true;
+      // Quick static flicker effect
       setTimeout(() => {
         showStatic = false;
-        if (player) {
-          player.playVideo();
-        }
-        isPlaying = true;
-      }, 800); // Reduced from 1500ms to 800ms for faster boot
+        setTimeout(() => {
+          showStatic = true;
+          setTimeout(() => {
+            showStatic = false;
+            if (player) {
+              player.playVideo();
+            }
+            isPlaying = true;
+          }, 50);
+        }, 50);
+      }, 100);
     } else {
       showStatic = true;
       setTimeout(() => {
@@ -79,7 +85,7 @@
           player.pauseVideo();
         }
         isPlaying = false;
-      }, 300); // Reduced from 500ms to 300ms for faster shutdown
+      }, 150); // Quick shutdown
     }
   }
 
@@ -275,7 +281,7 @@
     background: url('data:image/gif;base64,R0lGODlhCgAKAIAAAMzMzP///yH5BAEAAAEALAAAAAAKAAoAAAIRjI+py+0Po5y02ouz3rz7VgAAOw==');
     opacity: 0.3;
     pointer-events: none;
-    animation: static 0.2s steps(4) infinite;
+    animation: static 0.1s steps(2) infinite; /* Faster static animation */
     z-index: 2;
   }
 
@@ -366,9 +372,9 @@
 
   @keyframes static {
     0% { transform: translate(0, 0); }
-    25% { transform: translate(-2px, 2px); }
-    50% { transform: translate(2px, -2px); }
-    75% { transform: translate(-2px, -2px); }
-    100% { transform: translate(2px, 2px); }
+    25% { transform: translate(-1px, 1px); }
+    50% { transform: translate(1px, -1px); }
+    75% { transform: translate(-1px, -1px); }
+    100% { transform: translate(1px, 1px); }
   }
 </style> 
