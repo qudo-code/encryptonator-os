@@ -49,13 +49,17 @@
           autoplay: 1,
           controls: 0,
           modestbranding: 1,
-          playlist: playlistId
+          playlist: playlistId,
+          rel: 0, // Don't show related videos
+          iv_load_policy: 3 // Don't show video annotations
         }
       });
     };
 
-    // Auto-turn on the TV
-    handlePowerToggle();
+    // Auto-turn on the TV after a brief delay
+    setTimeout(() => {
+      handlePowerToggle();
+    }, 100); // Quick initial delay before auto-power on
   });
 
   function handlePowerToggle() {
@@ -67,7 +71,7 @@
           player.playVideo();
         }
         isPlaying = true;
-      }, 1500);
+      }, 800); // Reduced from 1500ms to 800ms for faster boot
     } else {
       showStatic = true;
       setTimeout(() => {
@@ -75,7 +79,7 @@
           player.pauseVideo();
         }
         isPlaying = false;
-      }, 500);
+      }, 300); // Reduced from 500ms to 300ms for faster shutdown
     }
   }
 

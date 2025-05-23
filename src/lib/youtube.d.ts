@@ -18,6 +18,10 @@ interface YT {
           controls?: 0 | 1;
           modestbranding?: 0 | 1;
           playlist?: string;
+          rel?: 0 | 1;
+          iv_load_policy?: 1 | 3;
+          playsinline?: 0 | 1;
+          mute?: 0 | 1;
         };
       }
     ): YTPlayer;
