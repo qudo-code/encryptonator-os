@@ -1,0 +1,1 @@
+export type Theme = 'win98' | 'winxp' | 'vista' | 'win7' | 'win10' | 'win11'; 
